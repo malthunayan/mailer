@@ -1,0 +1,90 @@
+[tool.poetry]
+name = "mailer"
+version = "0.1.0"
+description = ""
+authors = ["Mohammad Al-Thunayan <malthunayan4@gmail.com>"]
+
+[tool.poetry.scripts]
+mailer = "mailer.cli:main"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+isort = "^5.10.1"
+mypy = "^0.931"
+pylint = "^2.12.2"
+pytest = "^7.0.0"
+toml = "^0.10.2"
+types-toml = "^0.10.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs
+    | \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+)
+'''
+
+[tool.isort]
+multi_line_output = 3
+lines_after_imports = 2
+force_grid_wrap = 0
+combine_as_imports = true
+include_trailing_comma = true
+
+[tool.mypy]
+ignore_missing_imports = true
+strict_optional = true
+follow_imports = "silent"
+warn_redundant_casts = true
+warn_unused_ignores = true
+check_untyped_defs = true
+disallow_untyped_defs = true
+disallow_any_generics = true
+show_error_codes = true
+
+[tool.pylint.master]
+extension-pkg-whitelist = "pydantic"
+
+[tool.pylint.message_control]
+disable = '''
+  attribute-defined-outside-init,
+  duplicate-code,
+  invalid-name,
+  missing-docstring,
+  protected-access,
+  too-few-public-methods,
+  no-member,
+  raise-missing-from,
+  no-self-argument,
+  no-self-use,
+  fixme,
+  unsubscriptable-object,
+  redefined-outer-name,
+  inherit-non-class,
+  import-outside-toplevel,
+  too-many-ancestors,
+  cyclic-import,
+  # handled by black
+  format,
+  # handled by isort
+  wrong-import-order
+'''
